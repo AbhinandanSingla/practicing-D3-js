@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+<h2>hey world how r u </h2>
+<ul></ul>
+<svg height="500px" width="500px"></svg>
+</body>
+<script>
+    a = ['a', 'b', 'c', 'd', 'e']
+    d3.select('h2').style('font-size', '50px');
+    d3.select('ul')
+        .selectAll('li')
+        .data(a)
+        .enter()
+        .append('li')
+        .text(b => b);
+    const numbers = [2, 4, 5, 4, 4, 5, 5, 5, 9, 55, 6, 3, 55];
+    let barHeight = 60;
+    d3.select('svg')
+        .selectAll('rect')
+        .data(numbers)
+        .enter() // it loop values
+        .append('rect')
+        .attr('width', d => d)
+        .attr('height', barHeight - 4)
+        .attr('transform', (s, i) => `translate(100,${i * barHeight})`)
+</script>
+
+</html>

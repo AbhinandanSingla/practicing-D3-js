@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Indian Map</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.js"></script>
+    <style>
+        .countries {
+            fill: lawngreen;
+            stroke: black;
+            stroke-opacity: 0.5;
+        }
+
+        .countries:hover {
+            fill: palevioletred;
+        }
+
+        .sphere {
+            fill: aqua;
+        }
+
+        svg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <svg height="500px" id="mapSvg" width="1000px"></svg>
+
+</div>
+<footer>
+    <br>
+    <h3 style="text-align: center">Made by Abhinandan Singla</h3>
+</footer>
+<script>
+    // let mapUrl = './india.json'
+    let mapUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
+    const svg = d3.select('#mapSvg');
+    const width = +svg.attr('width');
+    const height = +svg.attr('height');
+    const projection = d3.geoNaturalEarth1();
+    const pathGenerator = d3.geoPath().projection(projection);
+
+
+    d3.json(mapUrl).then(data => {
+        console.log(data)
+        svg.append('path').attr('class', 'sphere').attr('d', pathGenerator({type: 'Sphere'}))
+        const countries = topojson.feature(data, data.objects.countries);
+        svg.selectAll('path')
+            .data(countries.features)
+            .enter()
+            .append('path')
+            .attr('class', 'countries')
+            .attr('d', pathGenerator)
+            .append('title')
+            .text(data => data.properties.name);
+    })
+</script>
+</body>
+</html>

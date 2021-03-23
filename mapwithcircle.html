@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.js"></script>
+
+</head>
+<body>
+<svg></svg>
+<script>
+    let mapUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
+
+    const loadPromise = () => {
+        Promise.all([
+                d3.csv('WorldPopulation.csv'),
+                d3.json(mapUrl)
+            ]
+        ).then(([csvData, topoJsonData]) => {
+            console.log(csvData)
+        })
+    }
+    loadPromise()
+</script>
+</body>
+
+</html>

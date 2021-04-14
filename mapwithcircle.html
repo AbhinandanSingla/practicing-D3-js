@@ -8,24 +8,19 @@
     <title>Document</title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.js"></script>
-
+    <meta content="upgrade-insecure-requests" http-equiv="Content-Security-Policy">
 </head>
 <body>
 <svg></svg>
-<script>
+</body>
+<script defer>
     let mapUrl = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
-
     const loadPromise = () => {
-        Promise.all([
-                d3.csv('WorldPopulation.csv'),
-                d3.json(mapUrl)
-            ]
-        ).then(([csvData, topoJsonData]) => {
-            console.log(csvData)
+        d3.csv('http://127.0.0.1:8000/worldpopulation').then(data => {
+            console.log(data)
         })
     }
     loadPromise()
 </script>
-</body>
 
 </html>
